@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "811662794965",
+    "project_id": "amazot-multi-store",
+    "storage_bucket": "amazot-multi-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811662794965:android:71ada4683f8c539a69825c",
+        "android_client_info": {
+          "package_name": "io.pooria.amazot_multi_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811662794965-bo3jhdlnr86vklkbljk6aujt7tpmsv4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "io.pooria.amazot_multi_store",
+            "certificate_hash": "38ff29be4ba69f3c1f1156ddb2d8c15fbcb9145f"
+          }
+        },
+        {
+          "client_id": "811662794965-2stroumu90630iullbsrccrcir6q03p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx0dLG9zvW6gFTvoR6IexNO1-IUNZbFUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811662794965-2stroumu90630iullbsrccrcir6q03p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
