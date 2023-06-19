@@ -2,18 +2,19 @@ import 'package:amazot_multi_store/controllers/auth_controller.dart';
 import 'package:amazot_multi_store/utils/show_snackBar.dart';
 import 'package:amazot_multi_store/views/buyers/auth/register_screen.dart';
 import 'package:amazot_multi_store/views/buyers/main_screen.dart';
+import 'package:amazot_multi_store/views/vendor/views/screens/landing_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-import '../../../controllers/google_auth_controller.dart';
+import '../../../../controllers/google_auth_controller.dart';
 
-class LoginScreen extends StatefulWidget {
+class VendorAuthScreen extends StatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<VendorAuthScreen> createState() => _VendorAuthScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _VendorAuthScreenState extends State<VendorAuthScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final AuthController _authController = AuthController();
   final AuthService _authService = AuthService();
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
           key: _formKey,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text(
-              'Login Customer\'s Account',
+              'Login Vendor\'s Account',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             Padding(
@@ -124,12 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
               Buttons.Google,
               onPressed: () async {
                 UserCredential? userCredential =
-                    await _authService.signInWithGoogle('user');
+                    await _authService.signInWithGoogle('vendor');
                 if (userCredential != null) {
                   // User logged in successfully, handle navigation or other logic
                   return Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return MainScreen();
+                    return LandingScreen();
                   }));
                 }
               },

@@ -1,7 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:amazot_multi_store/controllers/auth_controller.dart';
 import 'package:amazot_multi_store/utils/show_snackBar.dart';
 import 'package:amazot_multi_store/views/buyers/auth/login_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -20,16 +24,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late String phoneNumber;
 
   late String password;
+  Uint8List? _image;
+
+  String author = 'user';
 
   bool _isLoading = false;
 
-  signUpUser() async {
+  _signUpUser() async {
     setState(() {
       _isLoading = true;
     });
     if (_formKey.currentState!.validate()) {
       await _authController
-          .signUpUsers(email, fullName, phoneNumber, password)
+          .signUpUsers(email, fullName, phoneNumber, password, _image!)
           .whenComplete(() {
         setState(() {
           _formKey.currentState!.reset();
@@ -43,6 +50,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
       });
       return showSnack(context, 'Fields must not be empty');
     }
+  }
+
+  selectGalleryImage() async {
+    Uint8List img = await _authController.pickProfileImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
+  }
+
+  selectCameraImage() async {
+    Uint8List img = await _authController.pickProfileImage(ImageSource.camera);
+    setState(() {
+      _image = img;
+    });
   }
 
   @override
@@ -59,9 +80,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   'Create Customer"s Account',
                   style: TextStyle(fontSize: 20),
                 ),
-                CircleAvatar(
-                  radius: 64,
-                  backgroundColor: Colors.yellow.shade900,
+                Stack(
+                  children: [
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundColor: Colors.yellow.shade900,
+                            backgroundImage: MemoryImage(_image!),
+                          )
+                        : CircleAvatar(
+                            radius: 64,
+                            backgroundColor: Colors.yellow.shade900,
+                            backgroundImage: NetworkImage(
+                                'https://media.istockphoto.com/id/1463555369/it/foto/testa-umana-con-pezzi-di-cervello-fatti-di-carta-su-sfondo-blu-vista-dallalto-e-spazio-per-il.jpg?s=2048x2048&w=is&k=20&c=DZqPNph6s51TN4bhzMsiGNWvhHUfiMfS1HSPzgU92Ek='),
+                          ),
+                    Positioned(
+                        right: 5,
+                        top: 5,
+                        child: IconButton(
+                          onPressed: () {
+                            selectGalleryImage();
+                          },
+                          icon: Icon(
+                            CupertinoIcons.photo,
+                            color: Colors.white,
+                          ),
+                        ))
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(13.0),
@@ -70,6 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value!.isEmpty) {
                         return 'Email must not be empty';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       email = value;
@@ -84,6 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value!.isEmpty) {
                         return 'Full Name must not be empty';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       fullName = value;
@@ -98,6 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value!.isEmpty) {
                         return 'Phone Number must not be empty';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       phoneNumber = value;
@@ -114,6 +162,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (value!.isEmpty) {
                         return 'Password must not be empty';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       password = value;
@@ -123,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    signUpUser();
+                    _signUpUser();
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width - 40,

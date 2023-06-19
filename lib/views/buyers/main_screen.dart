@@ -7,6 +7,7 @@ import 'package:amazot_multi_store/views/buyers/nav_screens/store_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     CategoryScreen(),
     StoreScreen(),
-    Cart_screen(),
+    CartScreen(),
     SearchScreen(),
     AccountScreen()
   ];
@@ -28,26 +29,39 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _pageIndex,
-      onTap: (value){
-        setState(() {
-          _pageIndex = value;
-        });
-      },
-      unselectedItemColor: Colors.black,
-      selectedItemColor: Colors.orange,
-      items: [
-        BottomNavigationBarItem(icon: Icon(CupertinoIcons.home,size: 20,),label: 'Home'),
-        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/explore.svg',width: 20),label: 'CATEGORIES'),
-        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/shop.svg',width: 20),label: 'STORE'),
-        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/cart.svg',width: 20),label: 'CART'),
-        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/search.svg',width: 20),label: 'SEARCH'),
-        BottomNavigationBarItem(icon: SvgPicture.asset('assets/icons/account.svg',width: 20),label: 'ACCOUNT'),
-
-     ],
-    ),
+        currentIndex: _pageIndex,
+        onTap: (value) {
+          setState(() {
+            _pageIndex = value;
+          });
+        },
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.orange,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                CupertinoIcons.home,
+                size: 20,
+              ),
+              label: 'Home'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/explore.svg', width: 20),
+              label: 'CATEGORIES'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/shop.svg', width: 20),
+              label: 'STORE'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/cart.svg', width: 20),
+              label: 'CART'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/search.svg', width: 20),
+              label: 'SEARCH'),
+          BottomNavigationBarItem(
+              icon: SvgPicture.asset('assets/icons/account.svg', width: 20),
+              label: 'ACCOUNT'),
+        ],
+      ),
       body: _pages[_pageIndex],
-  );
-
+    );
   }
 }

@@ -8,7 +8,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
-  Future<UserCredential?> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle(String author) async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -17,15 +17,27 @@ class AuthService {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      await _firestore.collection('buyers').doc(googleAuth.idToken).set({
-        'accessToken': googleAuth.accessToken,
-        'idToken': googleAuth.idToken,
-        'email': googleUser.email,
-        'fullName': googleUser.displayName,
-        'phoneNumber': '0000000000',
-        'buyerId': googleUser.id,
-        'address': ''
-      });
+      if (author == 'user') {
+        await _firestore.collection('buyers').doc(googleAuth.idToken).set({
+          'accessToken': googleAuth.accessToken,
+          'idToken': googleAuth.idToken,
+          'email': googleUser.email,
+          'fullName': googleUser.displayName,
+          'phoneNumber': '0000000000',
+          'buyerId': googleUser.id,
+          'address': ''
+        });
+      } else {
+        await _firestore.collection('vendors').doc(googleAuth.idToken).set({
+          'accessToken': googleAuth.accessToken,
+          'idToken': googleAuth.idToken,
+          'email': googleUser.email,
+          'fullName': googleUser.displayName,
+          'phoneNumber': '0000000000',
+          'buyerId': googleUser.id,
+          'address': ''
+        });
+      }
       return await _auth.signInWithCredential(credential);
     } catch (e) {
       print('Error signing in with Google: $e');
