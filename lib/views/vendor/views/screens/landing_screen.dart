@@ -1,5 +1,7 @@
 import 'package:amazot_multi_store/controllers/google_auth_controller.dart';
 import 'package:amazot_multi_store/models/vendor_user_models.dart';
+import 'package:amazot_multi_store/views/vendor/views/auth/vendor_register_screen.dart';
+import 'package:amazot_multi_store/views/vendor/views/screens/main_vendor_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +27,15 @@ class LandingScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Text("Loading");
         }
+        if (!snapshot.data!.exists) {
+          return VendorRegisterScreen();
+        }
 
         VendorUserModel vendorUserModel = VendorUserModel.formJson(
             snapshot.data!.data()! as Map<String, dynamic>);
+        if (vendorUserModel.approved == true) {
+          return MainVendorScreen();
+        }
 
         return Center(
           child: Column(

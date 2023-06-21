@@ -56,7 +56,8 @@ class VendorController {
         'taxRegistered': taxRegistered,
         'taxNumber': taxNumber,
         'storeImage': storeImage,
-        'approved': false
+        'approved': false,
+        'vendorId': _auth.currentUser!.uid
       });
       res = 'success';
       print(res);

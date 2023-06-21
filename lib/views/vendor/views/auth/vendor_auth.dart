@@ -1,8 +1,7 @@
-import 'package:amazot_multi_store/controllers/auth_controller.dart';
+import 'package:amazot_multi_store/controllers/vendor_auth_controller.dart';
 import 'package:amazot_multi_store/utils/show_snackBar.dart';
-import 'package:amazot_multi_store/views/buyers/auth/register_screen.dart';
 import 'package:amazot_multi_store/views/buyers/main_screen.dart';
-import 'package:amazot_multi_store/views/vendor/views/screens/landing_screen.dart';
+import 'package:amazot_multi_store/views/vendor/views/auth/vendor_register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -30,7 +29,7 @@ class _VendorAuthScreenState extends State<VendorAuthScreen> {
       _isLoading = true;
     });
     if (_formKey.currentState!.validate()) {
-      await _authController.loginUsers(email, password);
+      await _authController.loginVendors(email, password);
 
       return Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
@@ -130,7 +129,7 @@ class _VendorAuthScreenState extends State<VendorAuthScreen> {
                   // User logged in successfully, handle navigation or other logic
                   return Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return LandingScreen();
+                    return VendorRegisterScreen();
                   }));
                 }
               },
@@ -147,7 +146,7 @@ class _VendorAuthScreenState extends State<VendorAuthScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) {
-                        return RegisterScreen();
+                        return VendorRegisterScreen();
                       }),
                     );
                   },

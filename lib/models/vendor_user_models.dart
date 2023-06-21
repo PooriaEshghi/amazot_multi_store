@@ -11,9 +11,11 @@ class VendorUserModel {
   final String? taxRegistered;
   final String? taxNumber;
   final String? storeImage;
+  final String? vendorId;
 
   VendorUserModel(
       {required this.approved,
+      required this.vendorId,
       required this.businessName,
       required this.email,
       required this.cityValue,
@@ -28,6 +30,7 @@ class VendorUserModel {
       : this(
           approved: json['approved']! as bool,
           businessName: json['businessName']! as String,
+          vendorId: json['vendorId']! as String,
           email: json['email']! as String,
           phoneNumber: json['phoneNumber']! as String,
           countryValue: json['countryValue']! as String,
