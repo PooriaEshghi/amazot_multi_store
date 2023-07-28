@@ -22,3 +22,7 @@ Cached network image (cached_network_image: ^3.2.3)
 # This shimmer animation widget can help you bring simple yet beautiful skeleton loaders to your project with ease.
 
 shimmer_animation: ^2.1.0+1
+
+# A Flutter widget to show a text form field to display a date or clock dialog.This widget extend TextField and has a similar behavior as TextFormField
+
+date_time_picker: ^2.1.0

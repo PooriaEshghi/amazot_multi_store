@@ -1,5 +1,5 @@
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/attribute_tab_screen.dart';
-import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/general_tscreen.dart';
+import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/general_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/images_tab_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/shiping_screen.dart';
 import 'package:flutter/material.dart';

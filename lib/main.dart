@@ -1,5 +1,7 @@
 // import 'package:amazot_multi_store/views/buyers/auth/login_screen.dart';
-import 'package:amazot_multi_store/views/vendor/views/screens/main_vendor_screen.dart';
+import 'package:amazot_multi_store/views/buyers/auth/login_screen.dart';
+import 'package:amazot_multi_store/views/buyers/main_screen.dart';
+import 'package:amazot_multi_store/views/buyers/nav_screens/account_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Brand-Bold',
       ),
-      home: MainVendorScreen(),
+      home: MainScreen(),
       builder: EasyLoading.init(),
     );
   }
