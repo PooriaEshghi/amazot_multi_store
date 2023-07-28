@@ -40,6 +40,9 @@ class _GeneralScreenState extends State<GeneralScreen> {
           child: Column(
             children: [
               TextFormField(
+                onChanged: (value){
+                  _productProvider.getFormData(productName: value);
+                },
                 decoration: InputDecoration(
                   labelText: 'Enter Product Name',
                 ),
@@ -48,6 +51,9 @@ class _GeneralScreenState extends State<GeneralScreen> {
                 height: 30,
               ),
               TextFormField(
+                onChanged: (value){
+                  _productProvider.getFormData(productPrice: double.parse(value));
+                },
                 decoration: InputDecoration(
                   labelText: 'Enter Product Price',
                 ),
@@ -56,6 +62,9 @@ class _GeneralScreenState extends State<GeneralScreen> {
                 height: 30,
               ),
               TextFormField(
+                onChanged: (value){
+                  _productProvider.getFormData(quantity: int.parse(value));
+                },
                 decoration: InputDecoration(
                   labelText: 'Enter Product Quantity',
                 ),
@@ -68,13 +77,20 @@ class _GeneralScreenState extends State<GeneralScreen> {
                 items: _categoryList.map<DropdownMenuItem<String>>((elm) {
                   return DropdownMenuItem(value: elm, child: Text(elm));
                 }).toList(),
-                onChanged: (value) {},
+                onChanged: (value) {
+                  setState(() {
+                    _productProvider.getFormData(category: value);
+                  });
+                },
               ),
               SizedBox(
                 height: 30,
               ),
               TextFormField(
-                maxLines: 10,
+                onChanged: (value){
+                  _productProvider.getFormData(description: value);
+                },
+                maxLines: 5,
                 decoration: InputDecoration(
                     labelText: 'Enter Product Description',
                     border: OutlineInputBorder(
