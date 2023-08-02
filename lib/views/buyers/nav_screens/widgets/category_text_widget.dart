@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CatergoryText extends StatelessWidget {
-  final List<String> _categorulable = [
+  final List<String> _categorylable = [
     'egg',
     'tomato',
     'olive',
@@ -28,7 +28,7 @@ class CatergoryText extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: _categorulable.length,
+                      itemCount: _categorylable.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -36,7 +36,7 @@ class CatergoryText extends StatelessWidget {
                             backgroundColor: Colors.yellow.shade900,
                             onPressed: () {},
                             label: Text(
-                              _categorulable[index],
+                              _categorylable[index],
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,

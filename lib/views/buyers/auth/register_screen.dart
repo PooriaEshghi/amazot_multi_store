@@ -105,7 +105,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             CupertinoIcons.photo,
                             color: Colors.white,
                           ),
-                        ))
+                        ),
+                        ),
                   ],
                 ),
                 Padding(
