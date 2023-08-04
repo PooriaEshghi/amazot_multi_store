@@ -12,6 +12,7 @@ class AttributeTabScreen extends StatefulWidget {
 class _AttributeTabScreenState extends State<AttributeTabScreen> {
   final TextEditingController _sizeController = TextEditingController();
   bool _entered = false;
+  bool _isSaved = false;
   List<String> _sizeList = [];
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,13 @@ class _AttributeTabScreenState extends State<AttributeTabScreen> {
       child: Column(
         children: [
           TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Enter Brand Name';
+              } else {
+                return null;
+              }
+            },
             onChanged: (value) {
               _productProvider.getFormData(brandName: value);
             },
@@ -39,6 +47,13 @@ class _AttributeTabScreenState extends State<AttributeTabScreen> {
                 child: Container(
                   width: 100,
                   child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter Size';
+                      } else {
+                        return null;
+                      }
+                    },
                     controller: _sizeController,
                     decoration: InputDecoration(labelText: 'Size'),
                     onChanged: (value) {
@@ -55,6 +70,7 @@ class _AttributeTabScreenState extends State<AttributeTabScreen> {
                         setState(() {
                           _sizeList.add(_sizeController.text);
                           _sizeController.clear();
+                          _isSaved = false;
                         });
                         print(_sizeList);
                       },
@@ -66,30 +82,55 @@ class _AttributeTabScreenState extends State<AttributeTabScreen> {
             height: 20,
           ),
           if (_sizeList.isNotEmpty)
-            Container(
-              height: 50,
-              child: ListView.builder(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50,
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   itemCount: _sizeList.length,
                   itemBuilder: ((context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue.shade100,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            _sizeList[index],
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _sizeList.removeAt(index);
+                            _productProvider.getFormData(sizeList: _sizeList);
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.blue.shade100,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              _sizeList[index],
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
                     );
-                  })),
-            )
+                  }),
+                ),
+              ),
+            ),
+          if (_sizeList.isNotEmpty)
+            ElevatedButton(
+                onPressed: () {
+                  _productProvider.getFormData(sizeList: _sizeList);
+                  setState(() {
+                    _isSaved = true;
+                  });
+                },
+                child: Text(
+                  _isSaved ? 'Saved' : 'save',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, letterSpacing: 3),
+                ))
         ],
       ),
     );

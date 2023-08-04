@@ -33,6 +33,13 @@ class _ShippingScreenState extends State<ShippingScreen> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'Enter Shipping Charge';
+                } else {
+                  return null;
+                }
+              },
               onChanged: (value) {
                 _productProvider.getFormData(shippingCharge: int.parse(value));
               },
