@@ -11,7 +11,8 @@ class UploadScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductProvider _productProvider = Provider.of<ProductProvider>(context);
+    final ProductProvider _productProvider =
+        Provider.of<ProductProvider>(context);
     return DefaultTabController(
       length: 4,
       child: Scaffold(
@@ -42,12 +43,16 @@ class UploadScreen extends StatelessWidget {
         bottomSheet: Padding(
           padding: EdgeInsets.all(8.0),
           child: ElevatedButton(
-            onPressed: (){
+            onPressed: () {
               print(_productProvider.productData['productName']);
-                  print(_productProvider.productData['productPrice']);
+              print(_productProvider.productData['productPrice']);
               print(_productProvider.productData['quantity']);
               print(_productProvider.productData['category']);
               print(_productProvider.productData['description']);
+              print(_productProvider.productData['imageUrlList']);
+              print(_productProvider.productData['shippingCharge']);
+              print(_productProvider.productData['chargeShipping']);
+              print(_productProvider.productData['brandName']);
             },
             child: Text('Save'),
           ),

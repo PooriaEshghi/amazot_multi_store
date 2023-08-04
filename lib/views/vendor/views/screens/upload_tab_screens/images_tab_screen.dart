@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:amazot_multi_store/provider/product_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 // ignore: must_be_immutable
 class ImagesTabScreen extends StatefulWidget {
@@ -10,9 +15,11 @@ class ImagesTabScreen extends StatefulWidget {
 }
 
 class _ImagesTabScreenState extends State<ImagesTabScreen> {
+  late FirebaseStorage _storage = FirebaseStorage.instance;
   final ImagePicker picker = ImagePicker();
 
   List<File> _images = [];
+  List<String> _imageUrlList = [];
 
   chooseImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -27,6 +34,8 @@ class _ImagesTabScreenState extends State<ImagesTabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ProductProvider _productProvider =
+        Provider.of<ProductProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -54,6 +63,28 @@ class _ImagesTabScreenState extends State<ImagesTabScreen> {
                       ),
                     );
             },
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          TextButton(
+            onPressed: () async {
+              EasyLoading.show(status: 'Save Images');
+              for (var img in _images) {
+                Reference ref =
+                    _storage.ref().child('productImage').child(Uuid().v4());
+                await ref.putFile(img).whenComplete(() async {
+                  await ref.getDownloadURL().then((value) {
+                    setState(() {
+                      _imageUrlList.add(value);
+                      _productProvider.getFormData(imageUrlList: _imageUrlList);
+                      EasyLoading.dismiss();
+                    });
+                  });
+                });
+              }
+            },
+            child: Text('Upload'),
           )
         ],
       ),
