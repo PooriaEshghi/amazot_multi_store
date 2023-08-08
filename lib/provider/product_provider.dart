@@ -48,5 +48,11 @@ class ProductProvider with ChangeNotifier {
     if (sizeList != null) {
       productData['sizeList'] = sizeList;
     }
+    notifyListeners();
+  }
+
+  clearData() {
+    productData.clear();
+    notifyListeners();
   }
 }

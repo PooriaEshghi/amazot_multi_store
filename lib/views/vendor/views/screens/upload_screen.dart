@@ -1,13 +1,19 @@
 import 'package:amazot_multi_store/provider/product_provider.dart';
+import 'package:amazot_multi_store/views/vendor/views/screens/main_vendor_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/attribute_tab_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/general_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/images_tab_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/shiping_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 class UploadScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     final ProductProvider _productProvider =
@@ -44,17 +50,36 @@ class UploadScreen extends StatelessWidget {
           bottomSheet: Padding(
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                EasyLoading.show(status: 'Please Wait');
                 if (_formKey.currentState!.validate()) {
-                  print(_productProvider.productData['productName']);
-                  print(_productProvider.productData['productPrice']);
-                  print(_productProvider.productData['quantity']);
-                  print(_productProvider.productData['category']);
-                  print(_productProvider.productData['description']);
-                  print(_productProvider.productData['imageUrlList']);
-                  print(_productProvider.productData['shippingCharge']);
-                  print(_productProvider.productData['chargeShipping']);
-                  print(_productProvider.productData['brandName']);
+                  final productId = Uuid().v4();
+                  await _firestore.collection('products').doc(productId).set({
+                    'productId': productId,
+                    'productName': _productProvider.productData['productName'],
+                    'productPrice':
+                        _productProvider.productData['productPrice'],
+                    'quantity': _productProvider.productData['quantity'],
+                    'category': _productProvider.productData['category'],
+                    'description': _productProvider.productData['description'],
+                    'imageUrl': _productProvider.productData['imageUrlList'],
+                    'scheduleDate':
+                        _productProvider.productData['scheduleDate'],
+                    'shippingCharge':
+                        _productProvider.productData['shippingCharge'],
+                    'chargeShipping':
+                        _productProvider.productData['chargeShipping'],
+                    'brandName': _productProvider.productData['brandName'],
+                    'sizeList': _productProvider.productData['sizeList'],
+                  }).whenComplete(() {
+                    _productProvider.clearData();
+                    _formKey.currentState!.reset();
+                    EasyLoading.dismiss();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return MainVendorScreen();
+                    }));
+                  });
                 }
               },
               child: Text('Save'),
