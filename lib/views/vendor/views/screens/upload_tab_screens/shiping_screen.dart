@@ -31,6 +31,7 @@ class _ShippingScreenState extends State<ShippingScreen>
             onChanged: (value) {
               setState(() {
                 _chargeShipping = value;
+                _productProvider.getFormData(chargeShipping: _chargeShipping);
               });
             }),
         if (_chargeShipping == true)

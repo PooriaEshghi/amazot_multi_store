@@ -20,8 +20,8 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
   bool get wantKeepAlive => true;
   final ImagePicker picker = ImagePicker();
   late FirebaseStorage _storage = FirebaseStorage.instance;
+  List<File> _image = [];
 
-  List<File> _images = [];
   List<String> _imageUrlList = [];
 
   chooseImage() async {
@@ -30,7 +30,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
       print('no image picked');
     } else {
       setState(() {
-        _images.add(File(pickedFile.path));
+        _image.add(File(pickedFile.path));
       });
     }
   }
@@ -46,7 +46,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
         children: [
           GridView.builder(
             shrinkWrap: true,
-            itemCount: _images.length + 1,
+            itemCount: _image.length + 1,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, mainAxisSpacing: 8, childAspectRatio: 3 / 3),
             itemBuilder: (context, index) {
@@ -62,7 +62,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             image: FileImage(
-                          _images[index - 1],
+                          _image[index - 1],
                         )),
                       ),
                     );
@@ -74,7 +74,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
           TextButton(
             onPressed: () async {
               EasyLoading.show(status: 'Save Images');
-              for (var img in _images) {
+              for (var img in _image) {
                 Reference ref =
                     _storage.ref().child('productImages').child(Uuid().v4());
                 await ref.putFile(img).whenComplete(() async {
@@ -90,7 +90,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
                 EasyLoading.dismiss();
               });
             },
-            child: _images.isNotEmpty ? Text('Upload') : Text(''),
+            child: _image.isNotEmpty ? Text('Upload') : Text(''),
           )
         ],
       ),

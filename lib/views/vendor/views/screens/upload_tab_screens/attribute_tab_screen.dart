@@ -69,7 +69,6 @@ class _AttributeTabScreenState extends State<AttributeTabScreen>
                           _sizeController.clear();
                           _isSaved = false;
                         });
-                        print(_sizeList);
                       },
                       child: Text('Add'))
                   : Text('Enter size'),

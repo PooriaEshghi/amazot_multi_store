@@ -5,6 +5,7 @@ import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/images_tab_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/upload_tab_screens/shiping_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +52,7 @@ class UploadScreen extends StatelessWidget {
             padding: EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () async {
+                print(_productProvider.productData['imageUrlList']);
                 EasyLoading.show(status: 'Please Wait');
                 if (_formKey.currentState!.validate()) {
                   final productId = Uuid().v4();
@@ -71,6 +73,7 @@ class UploadScreen extends StatelessWidget {
                         _productProvider.productData['chargeShipping'],
                     'brandName': _productProvider.productData['brandName'],
                     'sizeList': _productProvider.productData['sizeList'],
+                    'vendorId': FirebaseAuth.instance.currentUser!.uid,
                   }).whenComplete(() {
                     _productProvider.clearData();
                     _formKey.currentState!.reset();

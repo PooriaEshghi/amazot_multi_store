@@ -1,4 +1,5 @@
 // import 'package:amazot_multi_store/views/buyers/auth/login_screen.dart';
+import 'package:amazot_multi_store/provider/cart_provider.dart';
 import 'package:amazot_multi_store/provider/product_provider.dart';
 import 'package:amazot_multi_store/views/buyers/main_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,6 +14,9 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) {
       return ProductProvider();
+    }),
+    ChangeNotifierProvider(create: (_) {
+      return CartProvider();
     })
   ], child: const MyApp()));
 }

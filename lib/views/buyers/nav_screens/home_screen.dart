@@ -5,7 +5,6 @@ import 'package:amazot_multi_store/views/buyers/nav_screens/widgets/welcome_text
 import 'package:flutter/material.dart';
 
 import '../../../controllers/google_auth_controller.dart';
-import '../auth/login_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final AuthService _authService = AuthService();
@@ -22,18 +21,18 @@ class HomeScreen extends StatelessWidget {
         SearchInputWidget(),
         BannerWidget(),
         CatergoryText(),
-        ElevatedButton(
-          onPressed: () async {
-            await _authService.signOut();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return LoginScreen();
-              }),
-            );
-          },
-          child: Text('Sign Out'),
-        ),
+        // ElevatedButton(
+        //   onPressed: () async {
+        //     await _authService.signOut();
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) {
+        //         return LoginScreen();
+        //       }),
+        //     );
+        //   },
+        //   child: Text('Sign Out'),
+        // ),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:amazot_multi_store/views/buyers/nav_screens/widgets/home_products.dart';
+import 'package:amazot_multi_store/views/buyers/nav_screens/widgets/main_products_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -74,6 +75,7 @@ class _CatergoryTextState extends State<CatergoryText> {
               );
             },
           ),
+          if (_selectedCategory == null) MainProductsWidget(),
           if (_selectedCategory != null)
             HomeProduct(categoryName: _selectedCategory!)
         ],

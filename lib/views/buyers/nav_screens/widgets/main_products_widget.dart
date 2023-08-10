@@ -2,16 +2,11 @@ import 'package:amazot_multi_store/views/buyers/product-detail/product_detail_sc
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class HomeProduct extends StatelessWidget {
-  const HomeProduct({super.key, required this.categoryName});
-  final String categoryName;
-
+class MainProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> _productsStream = FirebaseFirestore.instance
-        .collection('products')
-        .where('category', isEqualTo: categoryName)
-        .snapshots();
+    final Stream<QuerySnapshot> _productsStream =
+        FirebaseFirestore.instance.collection('products').snapshots();
     return StreamBuilder<QuerySnapshot>(
       stream: _productsStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -20,7 +15,9 @@ class HomeProduct extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading......");
+          return LinearProgressIndicator(
+            color: Colors.yellow.shade600,
+          );
         }
 
         return Container(
