@@ -1,5 +1,5 @@
 import 'package:amazot_multi_store/controllers/google_auth_controller.dart';
-import 'package:amazot_multi_store/models/vendor_user_models.dart';
+import 'package:amazot_multi_store/models/vendor_user.dart';
 import 'package:amazot_multi_store/views/vendor/views/auth/vendor_register_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/screens/main_vendor_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

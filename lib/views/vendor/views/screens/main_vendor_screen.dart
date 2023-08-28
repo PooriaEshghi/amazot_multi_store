@@ -34,7 +34,7 @@ class _MainVendorScreenState extends State<MainVendorScreen> {
           },
           type: BottomNavigationBarType.fixed,
           unselectedItemColor: Colors.black,
-          selectedItemColor: Colors.yellow.shade900,
+          selectedItemColor: Colors.blue.shade400,
           items: [
             BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.money_dollar), label: 'EARNINGS'),

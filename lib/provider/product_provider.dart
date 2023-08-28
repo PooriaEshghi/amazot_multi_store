@@ -10,7 +10,7 @@ class ProductProvider with ChangeNotifier {
       String? category,
       String? description,
       DateTime? scheduleDate,
-      List<String>? imageUrlList,
+      String? imageUrlList,
       bool? chargeShipping,
       int? shippingCharge,
       String? brandName,

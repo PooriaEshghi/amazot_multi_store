@@ -77,7 +77,7 @@ class _RegisterScreenState extends State<VendorRegisterScreen> {
                   background: Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                          colors: [Colors.yellow.shade900, Colors.yellow]),
+                          colors: [Colors.blue.shade400, Colors.yellow]),
                     ),
                     child: Center(
                       child: Column(
@@ -240,7 +240,7 @@ class _RegisterScreenState extends State<VendorRegisterScreen> {
                         height: 30,
                         width: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
-                          color: Colors.yellow.shade900,
+                          color: Colors.blue.shade400,
                           borderRadius: BorderRadius.circular(
                             10,
                           ),
@@ -264,5 +264,4 @@ class _RegisterScreenState extends State<VendorRegisterScreen> {
       ),
     );
   }
-
 }

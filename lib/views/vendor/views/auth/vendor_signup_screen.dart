@@ -119,7 +119,7 @@ class _RegisterScreenState extends State<VendorSignUp> {
                     width: MediaQuery.of(context).size.width - 40,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: Colors.yellow.shade900,
+                        color: Colors.blue.shade400,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: _isLoading

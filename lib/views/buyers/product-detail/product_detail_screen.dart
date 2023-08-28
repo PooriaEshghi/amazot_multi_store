@@ -5,6 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
+import '../../../utils/show_snackBar.dart';
+
 class ProductDetailScreen extends StatefulWidget {
   final dynamic productData;
   const ProductDetailScreen({super.key, required this.productData});
@@ -53,37 +55,38 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           // [_imageIndex]
                           )),
                 ),
-                Positioned(
-                    bottom: 0,
-                    child: Container(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: widget.productData['imageUrl'].length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            // onTap: () {
-                            //   setState(() {
-                            //     _imageIndex = index;
-                            //   });
-                            // },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.yellow.shade900)),
-                                height: 60,
-                                width: 60,
-                                child: Image.network(
-                                    widget.productData['imageUrl'][index]),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ))
+                // Positioned(
+                //     bottom: 0,
+                //     child: Container(
+                //       height: 50,
+                //       width: MediaQuery.of(context).size.width,
+                //       child: ListView.builder(
+                //         scrollDirection: Axis.horizontal,
+                //         itemCount: widget.productData['imageUrl'].length,
+                //         itemBuilder: (context, index) {
+                //           return InkWell(
+                //             // onTap: () {
+                //             //   setState(() {
+                //             //     _imageIndex = index;
+                //             //   });
+                //             // },
+                //             child: Padding(
+                //               padding: const EdgeInsets.all(8.0),
+                //               child: Container(
+                //                 decoration: BoxDecoration(
+                //                     border: Border.all(
+                //                         color: Colors.blue.shade400)),
+                //                 height: 60,
+                //                 width: 60,
+                //                 child: Image.network(
+                //                     widget.productData['imageUrl'][index]),
+                //               ),
+                //             ),
+                //           );
+                //         },
+                //       ),
+                //     ),
+                //     )
               ],
             ),
             SizedBox(
@@ -97,7 +100,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     fontSize: 22,
                     letterSpacing: 8,
                     fontWeight: FontWeight.bold,
-                    color: Colors.yellow.shade900),
+                    color: Colors.blue.shade400),
               ),
             ),
             Padding(
@@ -116,11 +119,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 children: [
                   Text(
                     'Product Description',
-                    style: TextStyle(color: Colors.yellow.shade900),
+                    style: TextStyle(color: Colors.blue.shade400),
                   ),
                   Text(
                     'View More',
-                    style: TextStyle(color: Colors.yellow.shade900),
+                    style: TextStyle(color: Colors.blue.shade400),
                   ),
                 ],
               ),
@@ -145,7 +148,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Text(
                   'This Product Will be Shipping On',
                   style: TextStyle(
-                      color: Colors.yellow.shade900,
+                      color: Colors.blue.shade400,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
@@ -193,20 +196,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           onTap: () {
-            _cartProvider.addProductToCart(
-                widget.productData['productName'],
-                widget.productData['productId'],
-                widget.productData['quantity'],
-                widget.productData['productPrice'],
-                widget.productData['vendorId'],
-                _selectedSize!,
-                widget.productData['scheduleDate']);
+            if (_selectedSize == null) {
+              return showSnack(context, 'Please Select a Size');
+            } else {
+              _cartProvider.addProductToCart(
+                  widget.productData['productName'],
+                  widget.productData['productId'],
+                  widget.productData['imageUrl'],
+                  1,
+                  widget.productData['quantity'],
+                  widget.productData['productPrice'],
+                  widget.productData['vendorId'],
+                  _selectedSize!,
+                  widget.productData['scheduleDate']);
+              return showSnack(context, 'Item added to cart');
+            }
           },
           child: Container(
             height: 50,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: Colors.yellow.shade900,
+                color: Colors.blue.shade400,
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

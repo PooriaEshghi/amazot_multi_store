@@ -22,7 +22,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
   late FirebaseStorage _storage = FirebaseStorage.instance;
   List<File> _image = [];
 
-  List<String> _imageUrlList = [];
+  String _imageUrlList = "";
 
   chooseImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -80,7 +80,7 @@ class _ImagesTabScreenState extends State<ImagesTabScreen>
                 await ref.putFile(img).whenComplete(() async {
                   await ref.getDownloadURL().then((value) {
                     setState(() {
-                      _imageUrlList.add(value);
+                      _imageUrlList = value;
                     });
                   });
                 });

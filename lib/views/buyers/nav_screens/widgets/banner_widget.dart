@@ -42,7 +42,7 @@ class _BannerWidgetState extends State<BannerWidget> {
         height: 140,
         width: double.infinity,
         decoration: BoxDecoration(
-            color: Colors.yellow.shade900,
+            color: Colors.blue.shade400,
             borderRadius: BorderRadius.circular(10)),
         child: PageView.builder(
             itemCount: _bannerImage.length,

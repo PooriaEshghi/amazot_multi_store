@@ -85,28 +85,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     _image != null
                         ? CircleAvatar(
                             radius: 64,
-                            backgroundColor: Colors.yellow.shade900,
+                            backgroundColor: Colors.blue.shade400,
                             backgroundImage: MemoryImage(_image!),
                           )
                         : CircleAvatar(
                             radius: 64,
-                            backgroundColor: Colors.yellow.shade900,
+                            backgroundColor: Colors.blue.shade400,
                             backgroundImage: NetworkImage(
                                 'https://media.istockphoto.com/id/1463555369/it/foto/testa-umana-con-pezzi-di-cervello-fatti-di-carta-su-sfondo-blu-vista-dallalto-e-spazio-per-il.jpg?s=2048x2048&w=is&k=20&c=DZqPNph6s51TN4bhzMsiGNWvhHUfiMfS1HSPzgU92Ek='),
                           ),
                     Positioned(
-                        right: 5,
-                        top: 5,
-                        child: IconButton(
-                          onPressed: () {
-                            selectGalleryImage();
-                          },
-                          icon: Icon(
-                            CupertinoIcons.photo,
-                            color: Colors.white,
-                          ),
+                      right: 5,
+                      top: 5,
+                      child: IconButton(
+                        onPressed: () {
+                          selectGalleryImage();
+                        },
+                        icon: Icon(
+                          CupertinoIcons.photo,
+                          color: Colors.white,
                         ),
-                        ),
+                      ),
+                    ),
                   ],
                 ),
                 Padding(
@@ -179,7 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: MediaQuery.of(context).size.width - 40,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: Colors.yellow.shade900,
+                        color: Colors.blue.shade400,
                         borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: _isLoading

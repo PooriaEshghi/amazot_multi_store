@@ -73,7 +73,7 @@ class HomeProduct extends StatelessWidget {
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 4,
-                                color: Colors.yellow.shade900),
+                                color: Colors.blue.shade400),
                           ),
                         ),
                       ],
