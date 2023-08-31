@@ -4,13 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../inner_screens/edit_profile.dart';
+
 class AccountScreen extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('buyers');
     return FutureBuilder<DocumentSnapshot>(
-      future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
+      future: users.doc('wVLN9C8HDbeDHl6kcSH21bdlGlv2').get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -52,13 +54,45 @@ class AccountScreen extends StatelessWidget {
                     backgroundImage: NetworkImage(data['profileImage']),
                   ),
                 ),
-                Text(
-                  data['fullName'],
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    data['fullName'],
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                  ),
                 ),
-                Text(
-                  data['email'],
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    data['email'],
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return EditProfileScreen();
+                    }));
+                  },
+                  child: Container(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width - 200,
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade500,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Edit Profile',
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 4,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
+                      ),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
