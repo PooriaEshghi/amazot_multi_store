@@ -1,4 +1,5 @@
 import 'package:amazot_multi_store/provider/cart_provider.dart';
+import 'package:amazot_multi_store/views/buyers/inner_screens/checkout_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -160,25 +161,36 @@ class CartScreen extends StatelessWidget {
 //           ),
       bottomSheet: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-            height: 50,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.blue.shade400,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-                child: Text(
-              "\$ " +
-                  _cartProvider.totalPrice.toStringAsFixed(2) +
-                  " " +
-                  'CHECKOUT',
-              style: TextStyle(
-                  color: Colors.white,
-                  letterSpacing: 8,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-            ))),
+        child: InkWell(
+          onTap: _cartProvider.totalPrice == 0.00
+              ? null
+              : () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return CheckoutScreen();
+                  }));
+                },
+          child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: _cartProvider.totalPrice == 0.00
+                    ? Colors.grey
+                    : Colors.blue.shade400,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                  child: Text(
+                "\$ " +
+                    _cartProvider.totalPrice.toStringAsFixed(2) +
+                    " " +
+                    'CHECKOUT',
+                style: TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 8,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ))),
+        ),
       ),
     );
   }

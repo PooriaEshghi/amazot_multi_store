@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         ),
         SearchInputWidget(),
         BannerWidget(),
-        CatergoryText(),
+        CategoryText(),
         // ElevatedButton(
         //   onPressed: () async {
         //     await _authService.signOut();

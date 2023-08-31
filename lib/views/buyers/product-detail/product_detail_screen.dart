@@ -172,16 +172,22 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(6.0),
-                          child: OutlinedButton(
-                            onPressed: () {
-                              setState(() {
-                                _selectedSize =
-                                    widget.productData['sizeList'][index];
-                              });
-                              print(_selectedSize);
-                            },
-                            child: Text(
-                              widget.productData['sizeList'][index],
+                          child: Container(
+                            color: _selectedSize ==
+                                    widget.productData['sizeList'][index]
+                                ? Colors.blue.shade100
+                                : null,
+                            child: OutlinedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _selectedSize =
+                                      widget.productData['sizeList'][index];
+                                });
+                                print(_selectedSize);
+                              },
+                              child: Text(
+                                widget.productData['sizeList'][index],
+                              ),
                             ),
                           ),
                         );
@@ -209,14 +215,18 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   widget.productData['vendorId'],
                   _selectedSize!,
                   widget.productData['scheduleDate']);
-              return showSnack(context, 'Item added to cart');
+              return showSnack(context,
+                  'You added ${widget.productData['productName']} TO YOUR CART');
             }
           },
           child: Container(
             height: 50,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: Colors.blue.shade400,
+                color: _cartProvider.getCartItem
+                        .containsKey(widget.productData['productId'])
+                    ? Colors.grey
+                    : Colors.blue.shade400,
                 borderRadius: BorderRadius.circular(10)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -231,14 +241,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'ADD TO CART',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        letterSpacing: 5),
-                  ),
+                  child: _cartProvider.getCartItem
+                          .containsKey(widget.productData['productId'])
+                      ? Text(
+                          'IN CART',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              letterSpacing: 5),
+                        )
+                      : Text(
+                          'ADD TO CART',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              letterSpacing: 5),
+                        ),
                 )
               ],
             ),
