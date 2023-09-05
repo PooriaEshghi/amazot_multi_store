@@ -1,12 +1,12 @@
 import 'package:amazot_multi_store/controllers/vendor_auth_controller.dart';
 import 'package:amazot_multi_store/utils/show_snackBar.dart';
-import 'package:amazot_multi_store/views/buyers/main_screen.dart';
 import 'package:amazot_multi_store/views/vendor/views/auth/vendor_register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import '../../../../controllers/google_auth_controller.dart';
+import '../screens/main_vendor_screen.dart';
 
 class VendorAuthScreen extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _VendorAuthScreenState extends State<VendorAuthScreen> {
 
       return Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) {
-        return MainScreen();
+        return MainVendorScreen();
       }));
     } else {
       setState(() {

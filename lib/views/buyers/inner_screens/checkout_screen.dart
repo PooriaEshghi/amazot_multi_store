@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 import '../main_screen.dart';
+import 'edit_profile.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({super.key});
@@ -99,7 +100,15 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 }),
             bottomSheet: data['address'] == ''
                 ? TextButton(
-                    onPressed: () {}, child: Text('Enter Billing aAdress'))
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return EditProfileScreen(
+                          userData: data,
+                        );
+                      }));
+                    },
+                    child: Text('Enter Billing aAdress'))
                 : Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: InkWell(

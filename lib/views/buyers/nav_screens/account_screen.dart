@@ -12,6 +12,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('buyers');
     return FutureBuilder<DocumentSnapshot>(
+      // future: users.doc(FirebaseAuth.instance.currentUser!.uid).get(),
       future: users.doc('wVLN9C8HDbeDHl6kcSH21bdlGlv2').get(),
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -72,7 +73,9 @@ class AccountScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return EditProfileScreen();
+                      return EditProfileScreen(
+                        userData: data,
+                      );
                     }));
                   },
                   child: Container(

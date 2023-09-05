@@ -11,29 +11,31 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        WelcomeText(),
-        SizedBox(
-          height: 19,
-        ),
-        SearchInputWidget(),
-        BannerWidget(),
-        CategoryText(),
-        // ElevatedButton(
-        //   onPressed: () async {
-        //     await _authService.signOut();
-        //     Navigator.push(
-        //       context,
-        //       MaterialPageRoute(builder: (context) {
-        //         return LoginScreen();
-        //       }),
-        //     );
-        //   },
-        //   child: Text('Sign Out'),
-        // ),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          WelcomeText(),
+          SizedBox(
+            height: 19,
+          ),
+          SearchInputWidget(),
+          BannerWidget(),
+          CategoryText(),
+          // ElevatedButton(
+          //   onPressed: () async {
+          //     await _authService.signOut();
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) {
+          //         return LoginScreen();
+          //       }),
+          //     );
+          //   },
+          //   child: Text('Sign Out'),
+          // ),
+        ],
+      ),
     );
   }
 }
